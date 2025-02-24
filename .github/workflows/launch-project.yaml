@@ -1,8 +1,10 @@
-# file: .github/workflows/say-hello.yml
 name: launch-project
-# on – определяет события, которые запускают воркфлоу
+
 on: push
-# Пример для проекта на Node.js
+
+env:
+  CI: true
+
 jobs:
   build: # имя взято для примера
     runs-on: ubuntu-latest
@@ -20,8 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       # Ставим зависимости
-      - run: npm install
       # Запускаем линтер
+      - run: make install
       - run: make lint
       # Запускаем тесты
       # у шагов может быть имя, иногда это помогает отладке
